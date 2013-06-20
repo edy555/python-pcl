@@ -25,7 +25,7 @@ cdef extern from "pcl/point_types.h" namespace "pcl":
         float x
         float y
         float z
-    cdef struct Normal:
+    cdef struct PointNormal:
         pass
 
 cdef extern from "pcl/features/normal_3d.h" namespace "pcl":
@@ -56,7 +56,7 @@ cdef extern from "pcl/segmentation/sac_segmentation.h" namespace "pcl":
         void segment (PointIndices, ModelCoefficients)
 
 ctypedef SACSegmentation[PointXYZ] SACSegmentation_t
-ctypedef SACSegmentationFromNormals[PointXYZ,Normal] SACSegmentationNormal_t
+ctypedef SACSegmentationFromNormals[PointXYZ,PointNormal] SACSegmentationNormal_t
 
 cdef extern from "pcl/surface/mls.h" namespace "pcl":
     cdef cppclass MovingLeastSquares[I,N]:
@@ -65,9 +65,9 @@ cdef extern from "pcl/surface/mls.h" namespace "pcl":
         void setSearchRadius (double)
         void setPolynomialOrder(bool)
         void setPolynomialFit(int)
-        void reconstruct (PointCloud[I])
+        void process (PointCloud[N])
 
-ctypedef MovingLeastSquares[PointXYZ,Normal] MovingLeastSquares_t
+ctypedef MovingLeastSquares[PointXYZ,PointNormal] MovingLeastSquares_t
 
 cdef extern from "pcl/search/kdtree.h" namespace "pcl::search":
     cdef cppclass KdTree[T]:
@@ -159,7 +159,7 @@ cdef extern from "pcl/sample_consensus/method_types.h" namespace "pcl":
         SAC_PROSAC = 6
 
 ctypedef PointCloud[PointXYZ] PointCloud_t
-ctypedef PointCloud[Normal] PointNormalCloud_t
+ctypedef PointCloud[PointNormal] PointNormalCloud_t
 ctypedef shared_ptr[PointCloud[PointXYZ]] PointCloudPtr_t
 
 cdef extern from "pcl/filters/statistical_outlier_removal.h" namespace "pcl":

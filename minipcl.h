@@ -7,9 +7,9 @@
 void mpcl_compute_normals(pcl::PointCloud<pcl::PointXYZ> &cloud,
                           int ksearch,
                           double searchRadius,
-                          pcl::PointCloud<pcl::Normal> &out);
+                          pcl::PointCloud<pcl::PointNormal> &out);
 
-void mpcl_sacnormal_set_axis(pcl::SACSegmentationFromNormals<pcl::PointXYZ, pcl::Normal> &sac,
+void mpcl_sacnormal_set_axis(pcl::SACSegmentationFromNormals<pcl::PointXYZ, pcl::PointNormal> &sac,
                              double ax, double ay, double az);
 
 void mpcl_extract(pcl::PointCloud<pcl::PointXYZ> &incloud,

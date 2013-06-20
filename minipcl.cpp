@@ -11,10 +11,10 @@
 void mpcl_compute_normals(pcl::PointCloud<pcl::PointXYZ> &cloud,
                           int ksearch,
                           double searchRadius,
-                          pcl::PointCloud<pcl::Normal> &out)
+                          pcl::PointCloud<pcl::PointNormal> &out)
 {
     pcl::search::KdTree<pcl::PointXYZ>::Ptr tree (new pcl::search::KdTree<pcl::PointXYZ> ());
-    pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> ne;
+    pcl::NormalEstimation<pcl::PointXYZ, pcl::PointNormal> ne;
 
     ne.setSearchMethod (tree);
     ne.setInputCloud (cloud.makeShared());
@@ -25,7 +25,7 @@ void mpcl_compute_normals(pcl::PointCloud<pcl::PointXYZ> &cloud,
     ne.compute (out);
 }
 
-void mpcl_sacnormal_set_axis(pcl::SACSegmentationFromNormals<pcl::PointXYZ, pcl::Normal> &sac,
+void mpcl_sacnormal_set_axis(pcl::SACSegmentationFromNormals<pcl::PointXYZ, pcl::PointNormal> &sac,
                              double ax, double ay, double az)
 {
     Eigen::Vector3f vect(ax,ay,az);
